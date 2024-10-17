@@ -1,2 +1,2 @@
-### Customer Segmentation of Mobile Users – Data Science Project
+# Customer Segmentation of Mobile Users – Data Science Project
 This project aims to segment mobile users based on their usage patterns, device characteristics, and demographic information using KMeans clustering. The project covers data preprocessing, feature engineering, clustering, and several ad-hoc analyses, including Principal Component Analysis (PCA) for visualization and cluster centroid analysis. The insights derived from this project can help businesses make data-driven decisions for personalized services, product development, or targeted marketing strategies.
