@@ -107,11 +107,11 @@ This project segments mobile users based on their usage patterns, providing insi
         python customer_segmentation.py
 
 # Dependencies
-  ## Python 3.x
-  ## pandas
-  ## scikit-learn
-  ## seaborn
-  ## matplotlib
+  #### Python 3.x
+  #### pandas
+  #### scikit-learn
+  #### seaborn
+  #### matplotlib
 
 # Future Enhancements
 ### Implement additional clustering algorithms (e.g., Hierarchical Clustering, DBSCAN) to compare results.
