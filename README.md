@@ -23,17 +23,37 @@ Operating System: Android = 0, iOS = 1
 Gender: Male = 0, Female = 1
 This step also involves scaling the features using StandardScaler to normalize them, which is important for distance-based clustering algorithms like KMeans.
 
-![image](https://github.com/user-attachments/assets/53a5f096-efe6-4d24-bbf7-46561b20f149)
+###  
+     # Data preprocessing: Convert categorical columns to numerical values
+     df['Operating System'] = df['Operating System'].map({'Android': 0, 'iOS': 1})
+     df['Gender'] = df['Gender'].map({'Male': 0, 'Female': 1})
+
+      # Select relevant columns for clustering and scale the data
+      scaler = StandardScaler()
+      X_scaled = scaler.fit_transform(X)
+
 
 ## 2. Clustering with KMeans
 The KMeans algorithm is used to group users into clusters based on their app usage patterns, battery consumption, and demographic factors. In this example, the data is clustered into 3 groups, but the number of clusters can be fine-tuned using the Elbow Method.
 
-![image](https://github.com/user-attachments/assets/6bbccd75-1451-4e25-85e2-5c2a0eedb4da)
+### 
+     # Perform KMeans clustering
+      kmeans = KMeans(n_clusters=3, random_state=42)
+      df['Cluster'] = kmeans.fit_predict(X_scaled)
+
 
 ## 3. Principal Component Analysis (PCA)
 PCA is applied to reduce the dimensionality of the dataset, making it easier to visualize the clusters in 2D. This technique is useful for understanding how distinct the clusters are in terms of key features.
 
-![image](https://github.com/user-attachments/assets/75209403-594c-4d5a-b80a-b2faf432d69d)
+### 
+      # PCA for dimensionality reduction
+        pca = PCA(n_components=2)
+        X_pca = pca.fit_transform(X_scaled)
+
+        # Scatter plot to visualize clusters
+        sns.scatterplot(x='PCA1', y='PCA2', hue='Cluster', data=df)
+        plt.show()
+
 
 ![image](https://github.com/user-attachments/assets/67174605-6ff2-472b-b883-10d02e78219c)
 
@@ -45,7 +65,14 @@ Various ad-hoc analyses are performed to gain deeper insights into each cluster,
 #### Correlation Analysis: Exploring relationships between different features.
 #### Cluster Centroid Analysis: Identifying the key characteristics of users within each cluster by analyzing the cluster centroids.
 
-![image](https://github.com/user-attachments/assets/035750b1-84f4-4a14-b4cd-ccdf30becfa4)
+###
+    # Example of cluster summary statistics
+      print(df.groupby('Cluster').mean())
+
+     # Boxplot for app usage time across clusters
+       sns.boxplot(x='Cluster', y='App Usage Time (min/day)', data=df)
+       plt.show()
+
 
 # Key Visualizations
 #### PCA Visualization of Clusters: Displays how well the clusters are separated in a 2D space.
@@ -55,7 +82,17 @@ Various ad-hoc analyses are performed to gain deeper insights into each cluster,
 # Elbow Method for Optimal Cluster Selection
 The Elbow Method helps determine the optimal number of clusters by plotting the inertia (sum of squared distances) for different values of n_clusters. The "elbow" point in the plot indicates the ideal number of clusters.
 
-![image](https://github.com/user-attachments/assets/b330d1d1-01a4-4f2a-83f8-1650045e8581)
+###
+       # Elbow method for determining the optimal number of clusters
+        inertia = []
+        for n in range(1, 11):
+           kmeans = KMeans(n_clusters=n, random_state=42)
+           inertia.append(kmeans.inertia_)
+
+       # Plot the elbow curve
+         plt.plot(range(1, 11), inertia, marker='o', linestyle='--')
+         plt.show()
+
 
 ![image](https://github.com/user-attachments/assets/25029e64-5368-4286-82cc-20f507010467)
 
@@ -70,11 +107,11 @@ This project segments mobile users based on their usage patterns, providing insi
         python customer_segmentation.py
 
 # Dependencies
-## Python 3.x
-## pandas
-## scikit-learn
-## seaborn
-## matplotlib
+  ## Python 3.x
+  ## pandas
+  ## scikit-learn
+  ## seaborn
+  ## matplotlib
 
 # Future Enhancements
 ### Implement additional clustering algorithms (e.g., Hierarchical Clustering, DBSCAN) to compare results.
