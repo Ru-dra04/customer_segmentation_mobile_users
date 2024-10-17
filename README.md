@@ -9,3 +9,6 @@ This project aims to segment mobile users based on their usage patterns, device 
 ##### ->  Performing ad-hoc analyses such as summary statistics, boxplots, correlation analysis, and optimal cluster determination using the elbow method.
 
 
+# Dataset
+The dataset contains various attributes of mobile users:
+![image](https://github.com/user-attachments/assets/66a500dd-4c14-4ebf-aa56-016323cd3928)
